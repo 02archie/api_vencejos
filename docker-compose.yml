@@ -1,0 +1,47 @@
+version: '3.9'
+services:
+#Servicio de MYSQL 
+  mysql:  
+    container_name: mysql_vencejos
+    image: mysql:5.7
+    restart: always # Cuando falla se reinicia el servicio
+    ports:
+      - ${MYSQL_PORT}:3306
+    environment:
+    #Crea una contraseña por default al usuario Root de la base de datos
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+    #Crea una db a la base de datos recien creada
+      MYSQL_DATABASE: vencejos
+    #volumes sirve para que se este actualizando el local con el docker
+    volumes:
+      - ./mysql:/var/lib/mysql:rw
+    #networks crea una red entre la base de datos y el backend por lo tanto la creamos
+    networks:
+      - net_vencejos
+    #Se tiene que decir que el docker de backend dependa del de BD
+
+#servicio de NestJS
+  api:
+    container_name: api_vencejos
+    restart: always
+    #Build construye el contenedor en base al dockerfile
+    build:
+      #el . en el context es para la ruta hacia el archivo
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - ${NEST_PORT}:3000
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - net_vencejos
+    depends_on:
+      - mysql
+
+
+volumes:
+#Esto sirve para no guardar cache en los volumes que pasamos al docker
+  schemas: {}
+#aqui se instancia la red
+networks:
+  net_vencejos:
