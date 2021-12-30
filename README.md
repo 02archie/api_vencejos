@@ -4,10 +4,13 @@
 
 **Port for docker MySQL**
 _MYSQL_PORT=_
+
 **Password for database vencejos**
 _MYSQL_PASSWORD=_
+
 **Port for docker nestjs**
 _NEST_PORT=_
+
 **URL for connection to database**
 _DATABASE_URL="mysql://USER:PASSWORD@HOST:PORT/DATABASE"_
 
