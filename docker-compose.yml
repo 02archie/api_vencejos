@@ -38,10 +38,6 @@ services:
     depends_on:
       - mysql
 
-
-volumes:
-#Esto sirve para no guardar cache en los volumes que pasamos al docker
-  schemas: {}
 #aqui se instancia la red
 networks:
   net_vencejos:
