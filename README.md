@@ -45,8 +45,12 @@
 ## Colaborators
 
 [<img align="left" alt="02archie | LinkedIn" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />][linkedin_carlos]   [<img align="left" alt="02archie | LinkedIn" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@3.13.0/icons/github.svg" />][github_carlos]  [<img aling="left" alt="02archie" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@3.13.0/icons/telegram.svg" />][telegram_carlos]
+
 *Carlos Cendejas Barbosa*
+
+
 [<img align="left" alt="02archie | LinkedIn" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@v3/icons/linkedin.svg" />][linkedin_andres]   [<img align="left" alt="02archie | LinkedIn" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@3.13.0/icons/github.svg" />][github_andres]  [<img aling="left" alt="02archie" width="22px" src="https://cdn.jsdelivr.net/npm/simple-icons@3.13.0/icons/telegram.svg" />][telegram_andres]
+
  *Andres Marquez Trujillo*
 
 [linkedin_carlos]: https://www.linkedin.com/in/cbarbosa02
