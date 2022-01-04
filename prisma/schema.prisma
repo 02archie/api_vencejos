@@ -25,12 +25,12 @@ model users {
   name           String           @db.VarChar(255)
   last_name      String           @db.VarChar(255)
   role           Role
-  phone          BigInt
+  phone          String           @db.VarChar(10)
   email          String           @unique
   password       String           @db.VarChar(255)
   created_at     DateTime         @default(now())
   updated_at     DateTime         @default(now())
-  deleted_at     DateTime
+  deleted_at     DateTime?
   users_shipping users_shipping[]
 }
 
@@ -40,7 +40,7 @@ model cat_status {
   status     String      @db.VarChar(255)
   created_at DateTime    @default(now())
   updated_at DateTime    @default(now())
-  deleted_at DateTime
+  deleted_at DateTime?
   shippings  shippings[]
 }
 
@@ -51,7 +51,7 @@ model schedules {
   hour                DateTime              @db.Time
   created_at          DateTime              @default(now())
   updated_at          DateTime              @default(now())
-  deleted_at          DateTime
+  deleted_at          DateTime?
   shippings_schedules shippings_schedules[]
 }
 
@@ -67,7 +67,7 @@ model shippings {
   status              cat_status            @relation(fields: [id_status], references: [id])
   created_at          DateTime              @default(now())
   updated_at          DateTime              @default(now())
-  deleted_at          DateTime
+  deleted_at          DateTime?
   id_status           Int
   users_shipping      users_shipping[]
   shippings_schedules shippings_schedules[]

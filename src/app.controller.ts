@@ -1,12 +1,30 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, HttpStatus } from "@nestjs/common";
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor() {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  responseOK(data, res) {
+    return res.status(HttpStatus.OK).json({
+      errors: false,
+      status_code: 200,
+      results: data,
+    });
+  }
+
+  responseWithErrors(error: [], res) {
+    return res.status(HttpStatus.BAD_REQUEST).json({
+      errors: true,
+      status_code: 400,
+      results: error,
+    });
+  }
+
+  responseErrorWithMessage(message, res) {
+    return res.status(HttpStatus.BAD_REQUEST).json({
+      errors: true,
+      status_code: 400,
+      message: message,
+    });
   }
 }
