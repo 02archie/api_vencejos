@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Res } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Res } from "@nestjs/common";
 import { AppController } from "src/app.controller";
 import { UsersService } from "./users.service";
 
@@ -19,6 +19,12 @@ export class UsersController extends AppController {
     super();
   }
 
+  /**
+   * Create Users
+   * @param request
+   * @param res
+   * @returns
+   */
   @Post()
   async createUsers(@Body() request: CreateUserDto, @Res() res: Response) {
     try {
@@ -27,5 +33,16 @@ export class UsersController extends AppController {
     } catch (error) {
       return this.responseWithErrors(error, res);
     }
+  }
+
+  /**
+   * Find User By Email
+   * @param email
+   * @param res
+   * @returns
+   */
+  @Get(":email")
+  async findUserByEmail(@Param("email") email: string) {
+    return await this.usersService.findUserByEmail(email);
   }
 }

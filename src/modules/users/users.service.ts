@@ -14,4 +14,14 @@ export class UsersService {
     const user = await this.prisma.users.create({ data: request });
     return user;
   }
+
+  /**
+   * Find user by email
+   */
+  async findUserByEmail(email: string) {
+    const user = await this.prisma.users.findUnique({
+      where: { email: email },
+    });
+    return user;
+  }
 }
