@@ -12,11 +12,11 @@ export class AppController {
     });
   }
 
-  responseWithErrors(error: [], res) {
+  responseWithErrors(res) {
     return res.status(HttpStatus.BAD_REQUEST).json({
       errors: true,
       status_code: 400,
-      results: error,
+      results: "Error de servidor, intentélo más tarde",
     });
   }
 

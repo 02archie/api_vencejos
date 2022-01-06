@@ -1,11 +1,30 @@
 import { Module } from "@nestjs/common";
-import { AuthenticationService } from "./authentication.service";
-import { AuthenticationController } from "./authentication.controller";
+import { JwtModule } from "@nestjs/jwt";
 import { UsersModule } from "../users/users.module";
 
+import { AuthenticationController } from "./authentication.controller";
+
+import { AuthenticationService } from "./authentication.service";
+import { PrismaService } from "src/prisma.service";
+
+import { jwtConstants } from "./models/constants.model";
+
 @Module({
-  imports: [UsersModule],
+  imports: [
+    UsersModule,
+    JwtModule.registerAsync({
+      inject: [],
+      useFactory: () => {
+        return {
+          secret: jwtConstants.secret,
+          signOptions: {
+            expiresIn: "8h",
+          },
+        };
+      },
+    }),
+  ],
   controllers: [AuthenticationController],
-  providers: [AuthenticationService],
+  providers: [AuthenticationService, PrismaService],
 })
 export class AuthenticationModule {}

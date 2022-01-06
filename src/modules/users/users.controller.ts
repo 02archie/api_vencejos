@@ -1,15 +1,16 @@
-import { Body, Controller, Get, Param, Post, Res } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Res, UseGuards } from "@nestjs/common";
 import { AppController } from "src/app.controller";
-import { UsersService } from "./users.service";
 
 import { CreateUserDto } from "./dto/create-user.dto";
-// import { UpdateUserDto } from "./dto/update-user.dto";
+
+import { UsersService } from "./users.service";
+import { PrismaService } from "src/prisma.service";
 
 import { Response } from "express";
+import { JwtAuthGuard } from "../authentication/guards/jwt-auth.guard";
+import { Public } from "../authentication/decorators/public.decorator";
 
-import { PrismaService } from "src/prisma.service";
-import { Prisma } from "@prisma/client";
-
+@UseGuards(JwtAuthGuard)
 @Controller("users")
 export class UsersController extends AppController {
   constructor(
@@ -25,24 +26,15 @@ export class UsersController extends AppController {
    * @param res
    * @returns
    */
+  @Public()
   @Post()
   async createUsers(@Body() request: CreateUserDto, @Res() res: Response) {
     try {
       const user = await this.usersService.createUsers(request);
       return this.responseOK(user, res);
     } catch (error) {
-      return this.responseWithErrors(error, res);
+      console.log(error);
+      return this.responseWithErrors(res);
     }
-  }
-
-  /**
-   * Find User By Email
-   * @param email
-   * @param res
-   * @returns
-   */
-  @Get(":email")
-  async findUserByEmail(@Param("email") email: string) {
-    return await this.usersService.findUserByEmail(email);
   }
 }
